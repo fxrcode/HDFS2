@@ -1,6 +1,7 @@
 package headfirst.designpatterns.proxy.virtualproxy;
 
 import java.net.*;
+import java.util.SplittableRandom;
 import java.awt.*;
 import javax.swing.*;
 
@@ -9,8 +10,13 @@ class ImageProxy implements Icon {
 	final URL imageURL;
 	Thread retrievalThread;
 	boolean retrieving = false;
-     
-	public ImageProxy(URL url) { imageURL = url; }
+
+	SplittableRandom random;
+
+	public ImageProxy(URL url) {
+		imageURL = url;
+		random = new SplittableRandom();
+	}
      
 	public int getIconWidth() {
 		if (imageIcon != null) {
@@ -40,19 +46,22 @@ class ImageProxy implements Icon {
 			if (!retrieving) {
 				retrieving = true;
 				
-				retrievalThread = new Thread(new Runnable() {
-					public void run() {
-						try {
-							setImageIcon(new ImageIcon(imageURL, "Album Cover"));
-							c.repaint();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
+				// retrievalThread = new Thread(new Runnable() {
+				// 	public void run() {
+				// 		try {
+				// 			setImageIcon(new ImageIcon(imageURL, "Album Cover"));
+				// 			c.repaint();
+				// 		} catch (Exception e) {
+				// 			e.printStackTrace();
+				// 		}
+				// 	}
+				// });
 				
 				retrievalThread = new Thread(() -> {
 						try {
+							int rd = random.nextInt(1000, 5000);
+							System.out.println("Sleeping for " + rd + " ms ...");
+							Thread.sleep(rd);
 							setImageIcon(new ImageIcon(imageURL, "Album Cover"));
 							c.repaint();
 						} catch (Exception e) {

@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>Head-First-Design-Patterns-2nd</groupId>
-  <artifactId>Head-First-Design-Patterns-2nd</artifactId>
+  <groupId>com.example</groupId>
+  <artifactId>hfdp2</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
     <sourceDirectory>src</sourceDirectory>
@@ -18,6 +18,11 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
+          <excludes>
+          	<exclude>**/headfirst/designpatterns/builder/**</exclude>
+          	<exclude>**/headfirst/designpatterns/combined/djview/**</exclude>
+          	<exclude>**/headfirst/designpatterns/prototype/**</exclude>
+          </excludes>
           <release>11</release>
         </configuration>
       </plugin>
